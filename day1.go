@@ -31,5 +31,10 @@ func main() {
 
     // Each elem in caloriesOfElves is the total calories of a particular elf.
     sort.Ints(caloriesOfElves)
+
+    // Part 1
     fmt.Println("Max calories among elves:", caloriesOfElves[len(caloriesOfElves)-1])
+    // Part 2
+    fmt.Println("Max calories among top-three elves:", caloriesOfElves[len(caloriesOfElves)-1] + caloriesOfElves[len(caloriesOfElves)-2] + caloriesOfElves[len(caloriesOfElves)-3])
+    // Part 2
 }
