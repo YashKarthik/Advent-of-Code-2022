@@ -75,3 +75,61 @@ func wrappedSub(start int) int {
     start -= 1
     return start
 }
+
+// Alternate way
+type Weapon struct {
+    points  int
+    beats   *Weapon
+    loses   *Weapon
+}
+
+type WeaponsLinkedList struct {
+    head *Weapon
+}
+
+func Day2Alt() {
+    file, err := os.Open("./input2.txt")
+    if err != nil {
+        panic(err)
+    }
+    defer file.Close()
+
+    var rock Weapon
+    var paper Weapon
+    var scissor Weapon
+
+    rock = Weapon{points: 1, beats: &scissor, loses: &paper}
+    paper = Weapon{points: 2, beats: &rock, loses: &scissor}
+    scissor = Weapon{points: 3, beats: &paper, loses: &rock}
+    //weapons := WeaponsLinkedList{&rock}
+
+    textToWeapons := map[string]Weapon{
+        "A": rock,
+        "B": paper,
+        "C": scissor,
+        "X": rock,
+        "Y": paper,
+        "Z": scissor,
+    }
+
+    points1 := 0
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+        round := scanner.Text()
+        myWeapon := textToWeapons[string(round[2])]
+        enemyWeapon := textToWeapons[string(round[0])]
+        points1 += myWeapon.points
+
+        if enemyWeapon == myWeapon { // draw
+            points1 += 3
+        } else {
+            if myWeapon.beats.points == enemyWeapon.points { // I win
+                points1 += 6
+            } else { // I lose
+                continue
+            }
+        }
+    }
+
+    fmt.Println("Points 1:", points1)
+}
