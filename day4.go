@@ -17,6 +17,8 @@ func Day4() {
 
     scanner := bufio.NewScanner(file)
     inclusive_range := 0
+    overlap := 0
+    
     for scanner.Scan() {
         assignedSectionString := scanner.Text()
         // assignedSectionArray will be an array of two elems eg: ["8-9", "10-14"]
@@ -44,17 +46,26 @@ func Day4() {
             }
         }
 
-        fmt.Println("Ranges:", sections)
-
         if sections[0] <= sections[2] && sections[1] >= sections[3] {
             inclusive_range++
-            fmt.Println("Inclusive")
         } else if sections[0] >= sections[2] && sections[1] <= sections[3] {
             inclusive_range++
-            fmt.Println("Inclusive")
+        }
+
+        // for overlap the start and end of one section must surround either start or end of the
+        // other section
+        if sections[0] <= sections[2] && sections[1] >= sections[2] {
+            overlap++
+        } else if sections[0] <= sections[3] && sections[1] >= sections[3] {
+            overlap++
+        } else if sections[0] <= sections[2] && sections[1] >= sections[3] {
+            overlap++
+        } else if sections[0] >= sections[2] && sections[1] <= sections[3] {
+            overlap++
         }
 
     }
 
     fmt.Println("\n-------\n", "Total inclusive range pairs:", inclusive_range)
+    fmt.Println(" Total overlapping range pairs:", overlap, "\n-------")
 }
