@@ -1,5 +1,5 @@
 package main
 
 func main() {
-    Day2Alt()
+    Day3Part2WithSets()
 }
