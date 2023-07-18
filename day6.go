@@ -20,15 +20,15 @@ func Day6() {
 
     for index := range signalBuffer {
         markerTest := NewSet()
-        markerTest.bulkAdd(signalBuffer[index:index+4])
+        markerTest.bulkAdd(signalBuffer[index:index+14])
 
         count := 0
         for _, val := range markerTest.contains {
             if val == true { count++ }
         }
 
-        if count == 4 {
-            fmt.Println(index+4)
+        if count == 14 {
+            fmt.Println(index+14)
             return
         }
     }
