@@ -66,6 +66,7 @@ func Day5() {
         stacks[movementArgs[1]-1] = stacks[movementArgs[1]-1][movementArgs[0]:] // remove the crates from it's current stack
 
         reverseArray(stacks[movementArgs[2]-1])
+        reverseArray(cratesToBeMoved) // part 2
         stacks[movementArgs[2]-1] = append(stacks[movementArgs[2]-1], cratesToBeMoved...)// put cratesToBeMoved at the top of destination stack
         reverseArray(stacks[movementArgs[2]-1])
     }
